@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bower_components/bootstrap-fileinput/css/fileinput.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <title>Multilingual Report Annotator</title>
+  </head>
+  <body class="report-page">
+
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Multilingual Report Annotator</a>
+          </div>
+        </div>
+      </nav>
+
+      <div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#original" aria-controls="original" data-toggle="tab">Original Text</a>
+            </li>
+            <li>
+              <a href="#translated" aria-controls="translated" data-toggle="tab">Translated</a>
+            </li>
+            <li>
+              <a href="#annotated" aria-controls="annotated" data-toggle="tab">Annotated</a>
+            </li>
+        </ul>
+      </div>
+      <div class="tab-content" id="reports-tab-content">
+        <div id="original" class="tab-pane fade in active">
+          <div class="well well-lg">
+          {% for line in original_text %}
+            {{ line }}<br>
+          {% endfor %}
+          </div>
+        </div>
+        <div id="translated" class="tab-pane fade">
+          <div class="well well-lg">
+          {% if translated_text is not none %}
+            {% for line in translated_text %}
+              {{ line }}<br>
+            {% endfor %}
+          {% else %}
+            The text was not yet translated.
+          {% endif %}
+          </div>
+        </div>
+        <div id="annotated" class="tab-pane fade">
+          <div class="well well-lg" id="annotated_text">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+      const annotations = {{ annotations|tojson|safe }}.map(JSON.parse);
+      const splitTranslatedText = {{ split_translated_text|tojson|safe }};
+
+    </script>
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script src="/static/bower_components/jquery-form/jquery.form.js"></script>
+    <script src="/static/js/util.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

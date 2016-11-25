@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bower_components/bootstrap-fileinput/css/fileinput.min.css">
+    <title>Multilingual Report Annotator</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Multilingual Report Annotator</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Upload Report</h3>
+        </div>
+        <div class="panel-body">
+          <form role="form" method="POST" action="/add_report">
+            <label class="control-label">Select File</label>
+            <input id="input-1" type="file" class="file">
+          </form>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Last Uploaded Reports</h3>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Category</th>
+              <th>Original Language</th>
+              <th>Date</th>
+              <th>Processed</th>
+              <th>More</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5634</td>
+              <td>Chest</td>
+              <td>PT-BR</td>
+              <td>23/03/2014</td>
+              <td>
+                <span class="glyphicon glyphicon-ok"></span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm">
+                  <span class="glyphicon glyphicon-book"></span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>6456</td>
+              <td>Pelvic</td>
+              <td>PT-PT</td>
+              <td>25/05/2014</td>
+              <td>No</td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm">
+                  <span class="glyphicon glyphicon-book"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+  </body>
+</html>

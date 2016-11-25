@@ -1,0 +1,78 @@
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+/*a.annotation {
+    color: inherit;
+    text-decoration: inherit;
+    background-color: #FFFF00;
+    cursor: pointer;
+}*/
+
+#annotation {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 1px solid black;
+}
+
+.popover {
+    padding: 0;
+    width: 300px;
+}
+
+.popover-content {
+    padding: 0;
+}
+
+.popover-panel {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 6px;
+}
+
+.popover-panel .panel-heading {
+    font-weight: bold;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.popover-arrow {
+    color: #777;
+}
+
+#popover-arrows {
+    float: right;
+}
+
+.popover.bottom>.arrow:after {
+  border-bottom-color: #f5f5f5;
+}
+
+.btn-popover {
+    display: block;
+}
+
+.carousel-control {
+    position: relative;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background: none;
+}
+
+.carousel-control.right {
+    padding-left: 3px;
+}
+
+#reports-tab-content {
+    margin-top: 10px;
+}
+
+
