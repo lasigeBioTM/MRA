@@ -6,7 +6,7 @@ from pybioportal.Bioportal import Bioportal
 
 from util import process_bioportal_annotations
 
-import json
+from sqlalchemy.dialects.mysql import JSON
 
 
 class Report(db.Model):
@@ -14,10 +14,10 @@ class Report(db.Model):
 
     report_id = db.Column(db.Integer, primary_key=True)
     original_text = db.Column(db.UnicodeText)
-    original_language = db.Column(db.String)
+    original_language = db.Column(db.Text)
     translated_text = db.Column(db.UnicodeText)
-    category = db.Column(db.String)
-    radlex_annotations = db.Column(db.ARRAY(db.UnicodeText))
+    category = db.Column(db.Text)
+    radlex_annotations = db.Column(JSON)
     creation_date = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
     def __init__(self, original_text, original_language, category):
@@ -82,10 +82,6 @@ class Report(db.Model):
         processed_annotations = process_bioportal_annotations(annotations,
                                                               bioportal_api)
 
-        # Turn the list of dict into a list of str because of database quirks.
-        report.radlex_annotations = map(
-            lambda annotation: json.dumps(annotation),
-            processed_annotations
-        )
+        report.radlex_annotations = processed_annotations
 
         db.session.commit()

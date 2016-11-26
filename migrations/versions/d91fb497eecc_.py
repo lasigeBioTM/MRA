@@ -1,16 +1,16 @@
 """empty message
 
-Revision ID: 59fa1629f118
-Revises:
-Create Date: 2016-11-21 09:34:40.274432
+Revision ID: d91fb497eecc
+Revises: 
+Create Date: 2016-11-26 09:40:16.994793
 
 """
 from alembic import op
 import sqlalchemy as sa
-
+from sqlalchemy.dialects import mysql
 
 # revision identifiers, used by Alembic.
-revision = '59fa1629f118'
+revision = 'd91fb497eecc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,10 +21,10 @@ def upgrade():
     op.create_table('reports',
     sa.Column('report_id', sa.Integer(), nullable=False),
     sa.Column('original_text', sa.UnicodeText(), nullable=True),
-    sa.Column('original_language', sa.String(), nullable=True),
+    sa.Column('original_language', sa.Text(), nullable=True),
     sa.Column('translated_text', sa.UnicodeText(), nullable=True),
-    sa.Column('category', sa.String(), nullable=True),
-    sa.Column('radlex_annotations', sa.ARRAY(sa.UnicodeText()), nullable=True),
+    sa.Column('category', sa.Text(), nullable=True),
+    sa.Column('radlex_annotations', mysql.JSON(), nullable=True),
     sa.Column('creation_date', sa.DateTime(timezone=True), server_default=sa.text(u'now()'), nullable=True),
     sa.PrimaryKeyConstraint('report_id')
     )

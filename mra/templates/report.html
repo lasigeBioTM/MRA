@@ -59,7 +59,7 @@
 
     <script type="text/javascript">
 
-      const annotations = {{ annotations|tojson|safe }}.map(JSON.parse);
+      const annotations = {{ annotations|tojson|safe }};
       const splitTranslatedText = {{ split_translated_text|tojson|safe }};
 
     </script>
