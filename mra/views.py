@@ -4,6 +4,8 @@ from util import split_span
 from mra import app
 from models import *
 
+import ast
+
 
 @app.route('/', methods=['GET'])
 def index_page():
@@ -24,7 +26,7 @@ def report_page(report_id):
 
     if report.radlex_annotations is not None:
         split_translated_text = split_span(report.translated_text)
-        annotations = report.radlex_annotations
+        annotations = ast.literal_eval(report.radlex_annotations)
     else:
         split_translated_text = None
         annotations = None
