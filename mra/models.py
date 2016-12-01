@@ -18,7 +18,7 @@ class Report(db.Model):
     radlex_annotations = db.Column(db.UnicodeText)
     creation_date = db.Column(
         db.DateTime(timezone=True),
-        server_default=func.now()
+        default=func.utc_timestamp()
     )
 
     def __init__(self, original_text, original_language, category):
