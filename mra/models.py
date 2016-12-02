@@ -64,7 +64,7 @@ class Report(db.Model):
 
         api.post_translations(
             text=report.original_text,
-            source_language='pt',
+            source_language=report.original_language,
             target_language='en',
             callback_url=callback_url
         )
