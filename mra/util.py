@@ -11,13 +11,7 @@ def split_span(s):
 
 def process_bioportal_annotations(annotations, bioportal_api):
 
-    # Only want RadLex annotations
-    radlex_annotations = filter(
-        lambda annotation: 'radlex' in annotation['annotatedClass']['@id'],
-        annotations
-    )
-
-    for annotation in radlex_annotations:
+    for annotation in annotations:
 
         # Get more information about the terms annotated
         cls_id = annotation['annotatedClass']['@id']
@@ -33,4 +27,4 @@ def process_bioportal_annotations(annotations, bioportal_api):
             if key not in info_to_keep:
                 del annotation['annotatedClass'][key]
 
-    return radlex_annotations
+    return annotations
