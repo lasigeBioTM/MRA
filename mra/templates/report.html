@@ -33,14 +33,14 @@
       </div>
       <div class="tab-content" id="reports-tab-content">
         <div id="original" class="tab-pane fade in active">
-          <div class="well well-lg">
+          <div class="well well-lg well-report">
           {% for line in original_text %}
             {{ line }}<br>
           {% endfor %}
           </div>
         </div>
         <div id="translated" class="tab-pane fade">
-          <div class="well well-lg">
+          <div class="well well-lg well-report">
           {% if translated_text is not none %}
             {% for line in translated_text %}
               {{ line }}<br>
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div id="annotated" class="tab-pane fade">
-          <div class="well well-lg" id="annotated_text">
+          <div class="well well-lg well-report" id="annotated_text">
           </div>
         </div>
       </div>
