@@ -145,7 +145,7 @@ const annotateTranslatedText = function(annotations, splitTranslatedText) {
     $.each(annotations, function(j, term) {
       const annotatedClass = term.annotatedClass;
       $.each(term.annotations, function(j, annotation) {
-        // If the annotation begins in the beggining of the word or ends where the word ends,
+        // If the annotation begins in the beginning of the word or ends where the word ends,
         // it means that the word is annotated
         if (annotation.from === tokenFrom + 1 || annotation.to === tokenTo + 1) {
           // To avoid repetition of annotations. This would happen if a word is annotated with a
