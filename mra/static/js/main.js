@@ -148,7 +148,13 @@ const annotateTranslatedText = function(annotations, splitTranslatedText) {
         // If the annotation begins in the beggining of the word or ends where the word ends,
         // it means that the word is annotated
         if (annotation.from === tokenFrom + 1 || annotation.to === tokenTo + 1) {
-          annotatedClasses.push(annotatedClass);
+          // To avoid repetition of annotations. This would happen if a word is annotated with a
+          // certain class and a longer expression which includes that word is annotated with the
+          // same class. For example, both "Supraspinatus" and "Supraspinatus Muscle" are annotated
+          // with the "supraspinatus muscle" class.
+          if (annotatedClasses.indexOf(annotatedClass) === -1) {
+            annotatedClasses.push(annotatedClass);
+          }
         }
       });
     });
