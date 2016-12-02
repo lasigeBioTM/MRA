@@ -23,9 +23,11 @@
             <li class="active">
               <a href="#original" aria-controls="original" data-toggle="tab">Original Text</a>
             </li>
-            <li>
-              <a href="#translated" aria-controls="translated" data-toggle="tab">Translated</a>
-            </li>
+            {% if original_language != 'en' %}
+              <li>
+                <a href="#translated" aria-controls="translated" data-toggle="tab">Translated</a>
+              </li>
+            {% endif %}
             <li>
               <a href="#annotated" aria-controls="annotated" data-toggle="tab">Annotated</a>
             </li>
@@ -60,7 +62,7 @@
     <script type="text/javascript">
 
       const annotations = {{ annotations|tojson|safe }};
-      const splitTranslatedText = {{ split_translated_text|tojson|safe }};
+      const splitTextToAnnotate = {{ split_text_to_annotate|tojson|safe }};
 
     </script>
     <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>

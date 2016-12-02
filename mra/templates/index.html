@@ -47,7 +47,6 @@
               <label class="control-label" for="file_input">Select File</label>
               <input id="file_input" type="file" name="file" class="file" data-show-preview="false">
             </div>
-
           </form>
 
         </div>
@@ -77,7 +76,7 @@
               <td>{{ report.original_language }}</td>
               <td>{{ report.creation_date.strftime('%Y-%m-%d %H:%M') }}</td>
               <td>
-                {% if report.translated_text and report.radlex_annotations %}
+                {% if report.radlex_annotations and (report.original_language == 'en' or report.translated_text) %}
                   <span class="glyphicon glyphicon-thumbs-up gi-2x"></span>
                 {% else %}
                   <span class="glyphicon glyphicon-thumbs-down gi-2x"></span>

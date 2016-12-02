@@ -129,12 +129,12 @@ const popoverContent = function(annotatedClasses) {
 };
 
 // From a list of annotations and a list of words, create a annotated text.
-const annotateTranslatedText = function(annotations, splitTranslatedText) {
+const annotateTranslatedText = function(annotations, splitTextToAnnotate) {
 
-  // This will be equivalent to splitTranslatedText, but will contain annotated words.
+  // This will be equivalent to splitTextToAnnotate, but will contain annotated words.
   const splitAnnotatedText = [];
 
-  $.each(splitTranslatedText, function(i, token) {
+  $.each(splitTextToAnnotate, function(i, token) {
 
     let tokenText = token[0];
     const tokenFrom = token[1];
@@ -188,11 +188,8 @@ jQuery(document).ready(function($) {
 // ############################## Index ##############################
   if ($('body').hasClass('index-page')) {
 
-    $('#upload-report-form').ajaxForm(function(response) {
-      // Rewrites the whole page with the new response.
-      document.open();
-      document.write(response);
-      document.close();
+    $('#upload-report-form').ajaxForm({
+      resetForm: true,
     });
 
 // ############################## Report ##############################
@@ -202,11 +199,11 @@ jQuery(document).ready(function($) {
 
       if (annotations !== null) {
         // The arguments given to the function are defined in the HTML, received from Jinja
-        const annotatedText =  annotateTranslatedText(annotations, splitTranslatedText);
+        const annotatedText =  annotateTranslatedText(annotations, splitTextToAnnotate);
         const annotatedTextProcessed = annotatedText.replace(/\n/g, '<br>');
         textDiv.html(annotatedTextProcessed);
       } else {
-        textDiv.html('Report was not yet translated.');
+        textDiv.html('Report was not yet annotated.');
       }
 
       $('[data-toggle=popover]').popover({'html': true, 'trigger': 'click'});

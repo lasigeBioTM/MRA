@@ -74,9 +74,14 @@ class Report(db.Model):
 
         report = cls.query.get(report_id)
 
+        if report.original_language == 'en':
+            text_to_annotate = report.original_text
+        else:
+            text_to_annotate = report.translated_text
+
         bioportal_api = Bioportal(app.config['BIOPORTAL_API_KEY'])
         annotations = bioportal_api.annotator(
-            report.translated_text,
+            text_to_annotate,
             ontologies='RADLEX'
         )
 

@@ -25,18 +25,23 @@ def report_page(report_id):
         translated_text = None
 
     if report.radlex_annotations is not None:
-        split_translated_text = split_span(report.translated_text)
+        if report.original_language == 'en':
+            split_text_to_annotate = split_span(report.original_text)
+        else:
+            split_text_to_annotate = split_span(report.translated_text)
+
         annotations = ast.literal_eval(report.radlex_annotations)
     else:
-        split_translated_text = None
+        split_text_to_annotate = None
         annotations = None
 
     return render_template(
         'report.html',
         original_text=original_text,
         translated_text=translated_text,
-        split_translated_text=split_translated_text,
+        split_text_to_annotate=split_text_to_annotate,
         annotations=annotations,
+        original_language=report.original_language
     )
 
 
@@ -47,7 +52,12 @@ def add_report_endpoint():
     category = request.form['category']
 
     report = Report.add_report(original_text, original_language, category)
-    Report.translate_report(report.report_id)
+
+    # Post processing
+    if original_language != 'en':
+        Report.translate_report(report.report_id)
+    else:
+        Report.annotate_report(report.report_id)
 
     last_reports = Report.get_last_n_reports(10)
     return render_template('index.html', reports=last_reports)
