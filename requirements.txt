@@ -4,3 +4,4 @@ Flask-Migrate==2.0.1
 PyMySQL==0.7.9
 unbabel-py==0.44
 git+https://github.com/LLCampos/pybioportal
+celery==4.0.0

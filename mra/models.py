@@ -1,4 +1,4 @@
-from mra import db, app
+from mra import db, app, celery
 from sqlalchemy.sql import func
 
 from unbabel.api import UnbabelApi
@@ -29,14 +29,14 @@ class Report(db.Model):
     def __repr__(self):
         return '<report_id {}>'.format(self.report_id)
 
-    @classmethod
-    def get_last_n_reports(cls, n):
+    @staticmethod
+    def get_last_n_reports(n):
         """Get the last n reports added to the database"""
-        return cls.query.order_by(cls.creation_date.desc()).limit(10)
+        return Report.query.order_by(Report.creation_date.desc()).limit(10)
 
-    @classmethod
-    def add_report(cls, original_text, original_language, category):
-        new_report = cls(
+    @staticmethod
+    def add_report(original_text, original_language, category):
+        new_report = Report(
             original_text=original_text,
             original_language=original_language,
             category=category
@@ -46,10 +46,11 @@ class Report(db.Model):
 
         return new_report
 
-    @classmethod
-    def translate_report(cls, report_id):
+    @staticmethod
+    @celery.task()
+    def translate_report(report_id):
 
-        report = cls.query.get(report_id)
+        report = Report.query.get(report_id)
 
         api = UnbabelApi(
             username=app.config['UNBABEL_USERNAME'],
@@ -69,10 +70,11 @@ class Report(db.Model):
             callback_url=callback_url
         )
 
-    @classmethod
-    def annotate_report(cls, report_id):
+    @staticmethod
+    @celery.task()
+    def annotate_report(report_id):
 
-        report = cls.query.get(report_id)
+        report = Report.query.get(report_id)
 
         if report.original_language == 'en':
             text_to_annotate = report.original_text

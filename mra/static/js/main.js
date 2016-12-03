@@ -188,8 +188,11 @@ jQuery(document).ready(function($) {
 // ############################## Index ##############################
   if ($('body').hasClass('index-page')) {
 
-    $('#upload-report-form').ajaxForm({
-      resetForm: true,
+    $('#upload-report-form').ajaxForm(function(response) {
+      // Rewrites the whole page with the new response.
+      document.open();
+      document.write(response);
+      document.close();
     });
 
 // ############################## Report ##############################

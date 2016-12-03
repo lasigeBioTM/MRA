@@ -55,9 +55,9 @@ def add_report_endpoint():
 
     # Post processing
     if original_language != 'en':
-        Report.translate_report(report.report_id)
+        Report.translate_report.delay(report.report_id)
     else:
-        Report.annotate_report(report.report_id)
+        Report.annotate_report.delay(report.report_id)
 
     last_reports = Report.get_last_n_reports(10)
     return render_template('index.html', reports=last_reports)
@@ -69,7 +69,7 @@ def translate_report_callback(report_id):
 
     report = Report.query.get(report_id)
     report.translated_text = translated_text
-    Report.annotate_report(report_id)
+    Report.annotate_report.delay(report_id)
 
     db.session.commit()
 
