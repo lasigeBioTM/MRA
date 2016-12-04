@@ -1,7 +1,6 @@
 Flask==0.11.1
 Flask-SQLAlchemy==2.1
 Flask-Migrate==2.0.1
-Flask-BasicAuth==0.2.0
 PyMySQL==0.7.9
 unbabel-py==0.44
 git+https://github.com/LLCampos/pybioportal
