@@ -27,8 +27,8 @@
           <form id="upload-report-form" role="form" method="POST" enctype=multipart/form-data action="/add_report">
 
             <div class="form-group col-md-6">
-              <label for="category_input">Category</label>
-              <input id="category_input" type="text" name="category" class="form-control">
+              <label class="control-label" for="file_input">Upload Report (.txt)</label>
+              <input id="file_input" type="file" name="file" class="file" data-show-preview="false">
             </div>
 
             <div class="form-group col-md-6">
@@ -44,9 +44,10 @@
             </div>
 
             <div class="form-group col-md-6">
-              <label class="control-label" for="file_input">Select File</label>
-              <input id="file_input" type="file" name="file" class="file" data-show-preview="false">
+              <label for="category_input">Category</label>
+              <input id="category_input" type="text" name="category" class="form-control">
             </div>
+
           </form>
 
         </div>
