@@ -1,5 +1,6 @@
 from mra import db, app, celery
 from sqlalchemy.sql import func
+from sqlalchemy.dialects.mysql import LONGTEXT, TEXT
 
 from unbabel.api import UnbabelApi
 from pybioportal.Bioportal import Bioportal
@@ -11,11 +12,11 @@ class Report(db.Model):
     __tablename__ = 'reports'
 
     report_id = db.Column(db.Integer, primary_key=True)
-    original_text = db.Column(db.UnicodeText)
-    original_language = db.Column(db.UnicodeText)
-    translated_text = db.Column(db.UnicodeText)
-    category = db.Column(db.UnicodeText)
-    radlex_annotations = db.Column(db.UnicodeText)
+    original_text = db.Column(LONGTEXT)
+    original_language = db.Column(TEXT)
+    translated_text = db.Column(LONGTEXT)
+    category = db.Column(TEXT)
+    radlex_annotations = db.Column(LONGTEXT)
     creation_date = db.Column(
         db.DateTime(timezone=True),
         default=func.utc_timestamp()
