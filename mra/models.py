@@ -90,7 +90,7 @@ class Report(db.Model):
         processed_annotations = process_bioportal_annotations(annotations,
                                                               bioportal_api)
 
-        annotations_str = str(processed_annotations)
+        annotations_str = unicode(str(processed_annotations))
 
         report.radlex_annotations = annotations_str
 
