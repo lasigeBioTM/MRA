@@ -1,15 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from celery import Celery
+from tasks import make_celery
 
 app = Flask(__name__)
 app.config.from_pyfile('../config.cfg')
 
 
-celery = Celery(
-    app.name,
-    broker=app.config['CELERY_BROKER_URL'],
-)
+celery = make_celery(app)
 
 db = SQLAlchemy(app)
 
