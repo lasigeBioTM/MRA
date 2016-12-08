@@ -1,13 +1,10 @@
 from flask import request, render_template, jsonify
-from flask_basicauth import BasicAuth
 
 from util import split_span
-from mra import app
+from mra import app, basic_auth
 from models import *
 
 import ast
-
-basic_auth = BasicAuth(app)
 
 
 @app.route('/', methods=['GET'])
