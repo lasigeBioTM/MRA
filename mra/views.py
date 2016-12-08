@@ -1,4 +1,5 @@
 from flask import request, render_template, jsonify
+from flask_basicauth import BasicAuth
 
 from util import split_span
 from mra import app
@@ -6,14 +7,18 @@ from models import *
 
 import ast
 
+basic_auth = BasicAuth(app)
+
 
 @app.route('/', methods=['GET'])
+@basic_auth.required
 def index_page():
     reports = Report.get_last_n_reports(10)
     return render_template('index.html', reports=reports)
 
 
 @app.route('/report/<int:report_id>', methods=['GET'])
+@basic_auth.required
 def report_page(report_id):
     report = Report.query.get(report_id)
 
