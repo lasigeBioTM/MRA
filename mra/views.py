@@ -65,12 +65,9 @@ def add_report_endpoint():
 
 @app.route('/translate_report_callback/<int:report_id>', methods=['POST'])
 def translate_report_callback(report_id):
+
     translated_text = request.form['translated_text']
-
-    report = Report.query.get(report_id)
-    report.translated_text = translated_text
+    Report.add_translated_text(report_id, translated_text)
     Report.annotate_report.delay(report_id)
-
-    db.session.commit()
 
     return '', 200

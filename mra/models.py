@@ -48,6 +48,13 @@ class Report(db.Model):
         return new_report
 
     @staticmethod
+    def add_translated_text(report_id, translated_text):
+        report = Report.query.get(report_id)
+        report.translated_text = translated_text
+        db.session.commit()
+        return True
+
+    @staticmethod
     @celery.task()
     def translate_report(report_id):
 
