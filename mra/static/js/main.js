@@ -24,7 +24,12 @@ const createReportTableRow = function(report) {
 };
 
 const addRowToReportTable = function(row) {
-  $('#last-reports-table tbody tr').last().remove();
+  const rows = $('#last-reports-table tbody tr');
+
+  if (rows.length === 10) {
+    rows.last().remove();
+  }
+
   $('#last-reports-table tbody').prepend(row);
 };
 
