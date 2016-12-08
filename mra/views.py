@@ -1,4 +1,4 @@
-from flask import request, render_template
+from flask import request, render_template, jsonify
 
 from util import split_span
 from mra import app
@@ -59,8 +59,13 @@ def add_report_endpoint():
     else:
         Report.annotate_report.delay(report.report_id)
 
-    last_reports = Report.get_last_n_reports(10)
-    return render_template('index.html', reports=last_reports)
+    report_dict = Report.get_dict(report.report_id)
+
+    report_dict['creation_date'] = report_dict['creation_date'].strftime(
+        '%Y-%m-%d %H:%M'
+    )
+
+    return jsonify(report_dict), 200
 
 
 @app.route('/translate_report_callback/<int:report_id>', methods=['POST'])

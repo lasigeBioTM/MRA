@@ -103,3 +103,52 @@ class Report(db.Model):
         report.radlex_annotations = annotations_str
 
         db.session.commit()
+
+    @staticmethod
+    def is_processed(report_id):
+        """Check if the report with id report_id is already processed. If the
+        text is in English, the text only needs to be annotated. Otherwise,
+        it needs to be translated and annotated."""
+
+        report = Report.query.get(report_id)
+
+        if report.radlex_annotations and (report.original_language == 'en' or
+                                          report.translated_text):
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def get_dict(report_id, complete=False):
+        """Returns a dictionary representation of the Report object. Beyond
+        the default attributes of the object, a "processed" attribute is added
+        to the dictionary, indicting if the report was already processed.Flask
+
+        If complete is "True", more lengthy information is sent. This
+        corresponds  to 'original_text' 'translated_text' and
+        'radlex_annotations'."""
+
+        report = Report.query.get(report_id)
+
+        report_dict = report.__dict__
+
+        clean_report_dict = dict(
+            (k, report_dict[k])
+            for k in report_dict.keys()
+            if k not in ('_sa_instance_state')
+        )
+
+        if not complete:
+
+            clean_report_dict = dict(
+                (k, clean_report_dict[k])
+                for k in clean_report_dict.keys()
+                if k not in ('original_text',
+                             'translated_text',
+                             'radlex_annotations'
+                             )
+            )
+
+        clean_report_dict['processed'] = Report.is_processed(report_id)
+
+        return clean_report_dict

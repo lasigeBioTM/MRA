@@ -2,6 +2,37 @@
 
 // ############################## Index ##############################
 
+const createReportTableRow = function(report) {
+  // Create a HTML table row from the report object.
+  const tableRow = $('<tr>');
+  tableRow.append('<td>' + report.report_id + '</td>');
+  tableRow.append('<td>' + report.category + '</td>');
+  tableRow.append('<td>' + report.original_language + '</td>');
+  tableRow.append('<td>' + report.creation_date + '</td>');
+  if (report.processed === true) {
+    tableRow.append('<td><span class="glyphicon glyphicon-thumbs-up gi-2x"></span></td>');
+  } else {
+    tableRow.append('<td><span class="glyphicon glyphicon-thumbs-down gi-2x"></span></td>');
+  }
+
+  const hyperlinkReport = $('<a href="/report/' + report.report_id + '">');
+  hyperlinkReport.append('<span class="glyphicon glyphicon-book gi-2x"></span>');
+  const hyperlinkColumn = $('<td>').append(hyperlinkReport);
+  tableRow.append(hyperlinkColumn);
+
+  return tableRow;
+};
+
+const addRowToReportTable = function(row) {
+  $('#last-reports-table tbody tr').last().remove();
+  $('#last-reports-table tbody').prepend(row);
+};
+
+const addReportToReportTable = function(report) {
+  const newRow = createReportTableRow(report);
+  addRowToReportTable(newRow);
+};
+
 // ############################## Report ##############################
 
 /** This makes that the popovers disappear when the user clicks outside of the popover.
@@ -188,11 +219,9 @@ jQuery(document).ready(function($) {
 // ############################## Index ##############################
   if ($('body').hasClass('index-page')) {
 
-    $('#upload-report-form').ajaxForm(function(response) {
-      // Rewrites the whole page with the new response.
-      document.open();
-      document.write(response);
-      document.close();
+    $('#upload-report-form').ajaxForm(function(report) {
+      addReportToReportTable(report);
+      $('#upload-report-form')[0].reset();
     });
 
 // ############################## Report ##############################
