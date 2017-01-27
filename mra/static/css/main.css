@@ -3,6 +3,10 @@
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
 
+#navbar-about {
+    margin-top: 7px;
+}
+
 /*a.annotation {
     color: inherit;
     text-decoration: inherit;
@@ -78,4 +82,3 @@
 .well-report {
     min-height: 400px;
 }
-
