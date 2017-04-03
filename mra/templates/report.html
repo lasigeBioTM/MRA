@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/bower_components/bootstrap-fileinput/css/fileinput.min.css">
-    <link rel="stylesheet" href="/static/css/main.css">
-    <title>Multilingual Report Annotator</title>
-  </head>
-  <body class="report-page">
-
-    <div class="container">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">Multilingual Report Annotator</a>
-          </div>
-          <div class='btn-toolbar pull-right'>
-            <a type="button" class="btn btn-primary" id="navbar-about" href='#modalAbout' data-toggle="modal">About</a>
-          </div>
-        </div>
-      </nav>
+{% extends "base.html" %}
+{% block body %}
 
       <div>
         <ul class="nav nav-tabs">
@@ -62,54 +42,11 @@
       </div>
     </div>
 
-    <div class="modal fade" id="modalAbout" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">About</h4>
-          </div>
-          <div class="modal-body">
-            <p>Most of the Ontologies nowadays are in the English language, which is a problem if you want to process some non-English text using Text Mining techniques that use these Ontologies. One solution would be to translate the ontology. Other is to translate the text and this is the approach that is explored in this demo application.</p>
-
-            <p>Here we consider the problem of annotating non-English medical reports with <a target="_blank" href="http://www.radlex.org/">RadLex</a> terms.</p>
-
-            <p>The flow of the application goes like this. The doctor or researcher uploads a .txt file containing a medical report to the application, and the text of this report is sent to <a target="_blank" href="https://unbabel.com/">Unbabel</a>'s translation services, which combines human translation with machine translation. In this prototype only machine translation is being used, for demonstration purposes. In a real-life scenario, human translation could also be used for more reliable results. So, the text is sent to translation and after a while (~2 min, to simulate a real human and machine translation) the translation is ready.</p>
-
-            <p>Then, the translated text is sent to <a target="_blank" href="http://bioportal.bioontology.org/">BioPortal</a> annotation services. After this is done it is possible to explore the annotations in a user friendly interface.</p>
-
-            <p>The interface of the annotations was partly inspired by a similar project called <a href='http://lexmap.xrlabs.com/'>LexMap</a>.</p>
-
-            <p>
-            <b>Developers:</b>
-            <ul>
-              <li><a target="_blank" href="mailto:luis.filipe.lcampos@gmail.com">Luís Campos</a></li>
-            </ul>
-            <b>Supervisors:</b>
-            <ul>
-              <li><a target="_blank" href="http://webpages.fc.ul.pt/~fjcouto/">Francisco Couto (FCUL)</a></li>
-              <li><a target="_blank" href="https://unbabel.com/">Vasco Pedro (Unbabel)</a></li>
-            </ul>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
     <script type="text/javascript">
 
       const annotations = {{ annotations|tojson|safe }};
       const splitTextToAnnotate = {{ split_text_to_annotate|tojson|safe }};
 
     </script>
-    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/static/bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
-    <script src="/static/bower_components/jquery-form/jquery.form.js"></script>
-    <script src="/static/js/util.js"></script>
-    <script src="/static/js/main.js"></script>
-  </body>
-</html>
+
+{% endblock %}
