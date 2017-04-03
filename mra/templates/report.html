@@ -53,5 +53,5 @@
 
 
 {% block custom_js_files %}
-<script src="/static/js/report.js"></script>
+<script src={{ url_for('static', filename='js/report.js') }}></script>
 {% endblock %}

@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/bower_components/bootstrap-fileinput/css/fileinput.min.css">
-    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href= {{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href= {{ url_for('static', filename='bower_components/bootstrap-fileinput/css/fileinput.min.css') }}>
+    <link rel="stylesheet" href= {{ url_for('static', filename='css/main.css') }}>
     <title>Multilingual Report Annotator</title>
   </head>
   <body>
@@ -59,12 +59,13 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/static/bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
-    <script src="/static/bower_components/jquery-form/jquery.form.js"></script>
-    <script src="/static/js/util.js"></script>
-    <script src="/static/js/main.js"></script>
+
+    <script src={{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}></script>
+    <script src={{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}></script>
+    <script src={{ url_for('static', filename='bower_components/bootstrap-fileinput/js/fileinput.min.js') }}></script>
+    <script src={{ url_for('static', filename='bower_components/jquery-form/jquery.form.js') }}></script>
+    <script src={{ url_for('static', filename='js/util.js') }}></script>
+    <script src={{ url_for('static', filename='js/main.js') }}></script>
     {% block custom_js_files %}{% endblock %}
   </body>
 </html>
