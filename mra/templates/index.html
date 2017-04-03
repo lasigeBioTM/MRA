@@ -68,7 +68,7 @@
                 {% endif %}
               </td>
               <td>
-                <a href='/report/{{ report.report_id }}'>
+                <a href={{ url_for('report_page', report_id=report.report_id) }}>
                   <span class="glyphicon glyphicon-book gi-2x"></span>
                 </a>
               </td>
