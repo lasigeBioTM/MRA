@@ -8,7 +8,7 @@
         </div>
         <div class="panel-body">
 
-          <form id="upload-report-form" role="form" method="POST" enctype=multipart/form-data action="/add_report">
+          <form id="upload-report-form" role="form" method="POST" enctype=multipart/form-data action= {{ url_for('add_report_endpoint') }}>
 
             <div class="form-group col-md-6">
               <label class="control-label" for="file_input">Upload Report (.txt)</label>
