@@ -2,3 +2,6 @@ config.cfg
 mra.sublime-project
 mra.sublime-workspace
 *.pyc
+mra.wsgi
+mra_env/
+restart_supervisor.sh
